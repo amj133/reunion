@@ -55,4 +55,14 @@ class ActivityTest < Minitest::Test
     assert_equal 100, activity.split_cost
   end
 
+  def test_amount_owed_returns_hash_with_amount_owed_positive_or_negative
+    activity = Activity.new("skydiving")
+
+    activity.add_participants({Bob: 115, Alice: 85})
+    activity.add_participants({Frodo: 100})
+
+    assert_equal [:Bob, :Alice, :Frodo], activity.amount_owed.keys
+    assert_equal [-15, 15, 0], activity.amount_owed.values
+  end
+
 end

@@ -20,8 +20,9 @@ class Activity
   end
 
   def amount_owed
-    participants.map do |person|
-      
+    participants.merge(participants) do |key, value|
+      split_cost - value
+    end
   end
 
 end
