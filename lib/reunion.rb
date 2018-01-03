@@ -10,25 +10,33 @@ class Reunion
   end
 
   def add_activity(activity)
-    @activities << activity
+    activities << activity
   end
 
   def total_cost
-    @activities.reduce(0) do |amount, activity|
+    activities.reduce(0) do |amount, activity|
       amount += activity.total_cost
       amount
     end
   end
 
   def activity_debts
-    x = @activities.map do |activity|
+    @activities.map do |activity|
       activity.amount_owed
     end
-    binding.pry
   end
 
-  # def people_debts
-  #   until activity_debts
-  # end
+  def people_debts
+    activity_debts.reduce(Hash.new(0)) do |people_debts, activity_debt|
+      people_debts.merge!(activity_debt){|key, oldval, newval| oldval + newval}
+      people_debts
+    end
+  end
+
+  def debt_summary
+    people_debts.map do |key, value|
+      "#{key}: #{value}\n"
+    end.join
+  end
 
 end
