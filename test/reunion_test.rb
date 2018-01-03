@@ -89,6 +89,8 @@ class ReunionTest < Minitest::Test
     backpacking.add_participants({Bob: 45, Alice: 50, Jim: 25})
     reunion.add_activity(skydiving)
     reunion.add_activity(backpacking)
+    puts "\nDebt Summary (person: debt(pos) or credit(neg))"
+    puts "-----------------------------------------------"
     puts reunion.debt_summary
 
     assert_equal "Bob: 40.0\nAlice: -75.0\nJim: 35.0\n", reunion.debt_summary
