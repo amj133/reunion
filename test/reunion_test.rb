@@ -37,4 +37,31 @@ class ReunionTest < Minitest::Test
 
     assert_equal [skydiving, backpacking], reunion.activities
   end
+
+  def test_total_cost_returns_total_cost_of_all_activities
+    reunion = Reunion.new("Richmond")
+    skydiving = Activity.new("Skydiving")
+    backpacking = Activity.new("Backpacking")
+
+    skydiving.add_participants({Bob: 105, Alice: 215})
+    backpacking.add_participants({Bob: 45, Alice: 50, Jim: 80})
+    reunion.add_activity(skydiving)
+    reunion.add_activity(backpacking)
+
+    assert_equal 495, reunion.total_cost
+  end
+
+  def test_cost_breakdown
+    reunion = Reunion.new("Richmond")
+    skydiving = Activity.new("Skydiving")
+    backpacking = Activity.new("Backpacking")
+
+    skydiving.add_participants({Bob: 105, Alice: 215, Jim: 130})
+    backpacking.add_participants({Bob: 45, Alice: 50, Jim: 80})
+    reunion.add_activity(skydiving)
+    reunion.add_activity(backpacking)
+    reunion.activity_debts
+
+  end
+
 end
